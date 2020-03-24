@@ -5,18 +5,10 @@ public class Airport {
     private int numRunways;
 
     private int capacity;
-    private ArrayList<Aircraft> aircraft = new ArrayList<Aircraft>();
+    private ArrayList<IAircraft> aircraft;
 
     public Airport() {
-
-    }
-
-    /**
-     * Returns aircraft at airport.
-     * @return ArrayList<Aircraft></Aircraft>
-     */
-    public ArrayList<Aircraft> getAircraft() {
-        return this.aircraft;
+        aircraft = new ArrayList<IAircraft>();
     }
 
     /**
@@ -24,6 +16,19 @@ public class Airport {
      * @return boolean
      */
     public boolean isTowered() {
-        return this.towered;
+        return towered;
     }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    /**
+     * Returns aircraft at airport.
+     * @return ArrayList<IAircraft></IAircraft>
+     */
+    public ArrayList<IAircraft> getAircraft() {
+        return aircraft;
+    }
+
 }
