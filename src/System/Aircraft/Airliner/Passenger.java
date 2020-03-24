@@ -9,6 +9,16 @@ public class Passenger implements IPerson {
 
     private ArrayList<Luggage> luggage;
 
+
+    Passenger(String name,boolean ginger,String seat,int luggage){
+        this.name=name;
+        this.ginger=ginger;
+        this.seat=seat;
+        
+    }
+
+
+
     @Override
     public String getName() {
         return name;
@@ -18,4 +28,9 @@ public class Passenger implements IPerson {
     public boolean isGing() {
         return ginger;
     }
+
+    public String getSeat(){
+        return seat;
+    }
+
 }
