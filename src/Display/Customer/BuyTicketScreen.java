@@ -1,8 +1,10 @@
-package Display;
+package Display.Customer;
+
+import Display.BoxedScreen;
 
 import java.util.Scanner;
 
-public class BuyTicketScreen implements IDisplay {
+public class BuyTicketScreen extends BoxedScreen {
     private Scanner input;
 
     public BuyTicketScreen() {

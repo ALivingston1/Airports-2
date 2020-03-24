@@ -1,4 +1,6 @@
-package System.Airliner;
+package System;
+
+import System.Aircraft.IAircraft;
 
 import java.util.ArrayList;
 
@@ -27,7 +29,7 @@ public class Airport {
 
     /**
      * Returns aircraft at airport.
-     * @return ArrayList<System.Airliner.IAircraft></System.Airliner.IAircraft>
+     * @return ArrayList<System.Aircraft.IAircraft></System.Aircraft.IAircraft>
      */
     public ArrayList<IAircraft> getAircraft() {
         return aircraft;

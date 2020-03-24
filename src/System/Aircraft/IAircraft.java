@@ -1,4 +1,4 @@
-package System.Airliner;
+package System.Aircraft;
 
 public interface IAircraft {
     String getMake();

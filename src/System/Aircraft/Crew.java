@@ -1,6 +1,6 @@
-package System;
+package System.Aircraft;
 
-import System.Airliner.IPerson;
+import System.Aircraft.Airliner.IPerson;
 
 public class Crew implements IPerson {
     private String name;

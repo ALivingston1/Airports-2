@@ -1,9 +1,13 @@
 package Display;
 
+import java.util.Scanner;
+
 public interface IDisplay {
     public void open();
 
-    public int getInt();
+    public void draw(String ...strings);
 
-    public String getString();
+    int getInt();
+
+    String getString();
 }
