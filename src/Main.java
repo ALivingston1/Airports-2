@@ -1,5 +1,5 @@
-import Display.Admin.MenuScreen;
-import Display.Customer.BuyTicketScreen;
+import display.admin.MenuScreen;
+import display.customer.BuyTicketScreen;
 
 import java.util.Scanner;
 
