@@ -26,6 +26,16 @@ public class MenuScreen implements IScreen {
         draw("Add", "Remove", "View", "Exit");
     }
 
+    @Override
+    public int getWidth() {
+        return 0;
+    }
+
+    @Override
+    public int getHeight() {
+        return 0;
+    }
+
     public void draw(String ...strings) {
         for (String s: strings) {
             System.out.print(s + " ".repeat(6));
