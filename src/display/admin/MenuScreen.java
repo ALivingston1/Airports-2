@@ -1,10 +1,11 @@
-package Display.Admin;
+package display.admin;
 
-import Display.IDisplay;
+import display.components.IDisplay;
+import display.components.IScreen;
 
 import java.util.Scanner;
 
-public class MenuScreen implements IDisplay {
+public class MenuScreen implements IScreen {
     private Scanner input;
 
     public MenuScreen() {
@@ -25,20 +26,14 @@ public class MenuScreen implements IDisplay {
         draw("Add", "Remove", "View", "Exit");
     }
 
-    @Override
-    public int getInt() {
-        return input.nextInt();
-    }
-
-    @Override
-    public String getString() {
-        return input.next();
-    }
-
-    @Override
     public void draw(String ...strings) {
         for (String s: strings) {
             System.out.print(s + " ".repeat(6));
         }
+    }
+
+    @Override
+    public void draw() {
+
     }
 }

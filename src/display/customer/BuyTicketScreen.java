@@ -1,6 +1,6 @@
-package Display.Customer;
+package display.customer;
 
-import Display.BoxedScreen;
+import display.components.BoxedScreen;
 
 import java.util.Scanner;
 
@@ -14,15 +14,5 @@ public class BuyTicketScreen extends BoxedScreen {
     @Override
     public void open() {
 
-    }
-
-    @Override
-    public int getInt() {
-        return input.nextInt();
-    }
-
-    @Override
-    public String getString() {
-        return input.next();
     }
 }
