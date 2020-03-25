@@ -1,14 +1,16 @@
 package display.components;
 
-public class BoxedScreen extends DisplayBox implements IScreen {
-    private DisplayBox box;
+import java.util.ArrayList;
 
-    public BoxedScreen(String title, int sections) {
-        super(title, sections);
+public class BoxedScreen extends AbstractScreen {
+    private ArrayList<DisplayBox> boxes;
+
+    public BoxedScreen() {
+
     }
 
     public BoxedScreen(String title, String ...strings) {
-        super(title, strings);
+
     }
 
     @Override
@@ -16,18 +18,23 @@ public class BoxedScreen extends DisplayBox implements IScreen {
         draw();
     }
 
+    /**
+     * Draws all of the boxes
+     */
     @Override
-    public int getWidth() {
-        return 0;
+    public void draw() {
+        for (DisplayBox b: boxes) {
+            b.draw();
+        }
     }
 
-    @Override
-    public int getHeight() {
-        return 0;
+    private void addBox(DisplayBox box) {
+        boxes.add(box);
     }
 
-    private void draw(String ...strings) {
-
+    private void popBox(DisplayBox box) {
+        boxes.remove(boxes.indexOf(box));
+        box = null;
     }
 
     private void drawBox() {
