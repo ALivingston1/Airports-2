@@ -8,6 +8,12 @@ public class Crew implements IPerson {
 
     private String role;
 
+    Crew(String name,boolean ginger,String role){
+        this.name=name;
+        this.ginger=ginger;
+        this.role=role;
+    }
+
     @Override
     public String getName() {
         return name;
