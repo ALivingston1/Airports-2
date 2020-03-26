@@ -5,37 +5,42 @@ import display.components.DisplayBox;
 import util.Reference;
 import util.UI;
 
+import java.util.ArrayList;
+
 public class BuyTicketScreen extends AbstractBoxScreen {
     private DisplayBox bookFlight;
     private DisplayBox pickAirline;
     private DisplayBox pickAirport;
+    private DisplayBox ticket;
 
-    private String airline = "";
-    private String depAirport = "";
-    private String arrAirport = "";
+    private ArrayList<String> ticketInfo;
 
     public BuyTicketScreen() {
+        ticketInfo = new ArrayList<>();
+
         //Creates new display box components with for various actions within screen
         bookFlight = new DisplayBox("Book A Flight");
         addBox(bookFlight);
 
         pickAirline = new DisplayBox("Which airline would you like to fly with?");
-        for (String s: Reference.airlineList) {
+        for (String s : Reference.airlineList) {
             pickAirline.addData(s);
         }   //Add all of the airline options from the reference list
         addBox(pickAirline);
 
         pickAirport = new DisplayBox("Enter your departure airport.");
-            for (int j = 0; j < (Reference.airportList.length * 3) / ((getMaxScreenWidth() / 4) - 1); j++) {
+        for (int j = 0; j < (Reference.airportList.length * 3) / ((getMaxScreenWidth() / 4) - 1); j++) {
 
-                String[] temp = Reference.airportList;
-                String s = "";
-                for (int i = j; i < (getMaxScreenWidth() / 4) - 1; i++) {
-                    s = s + temp[i];
-                }
-                pickAirport.addData(s);
+            String[] temp = Reference.airportList;
+            String s = "";
+            for (int i = j; i < (getMaxScreenWidth() / 4) - 1; i++) {
+                s = s + temp[i];
             }
+            pickAirport.addData(s);
+        }
         addBox(pickAirport);
+
+        ticket = new DisplayBox("Your ticket information.");
 
         //Finds the longest string contained in this screen and sets it as the width
         getMaxScreenWidth();
@@ -44,47 +49,67 @@ public class BuyTicketScreen extends AbstractBoxScreen {
     @Override
     public void open() {
         UI.clearScreen();
-        String input;
 
         bookFlight.draw();
-        pickAirline.draw();
+        getAirline();
+        getRoute();
 
-        while (airline.isEmpty()) {
-            input = UI.getString();
+        ticketInfo.add("Ticket Price: $" + UI.getRandomInt(400, 900));
+        for (String s: ticketInfo) {
+            ticket.addData(s);
+        }
+        ticket.draw();
+    }
+
+    /**Displays the Airline information
+     * Asks user to pick an airline
+     * stores answer.
+     */
+    private void getAirline() {
+        pickAirline.draw();
+        while (ticketInfo.isEmpty()) {
+            String input = UI.getString();
             for (String s : Reference.airlineList) {
                 if (input.equalsIgnoreCase(s)) {
-                    airline = s;
+                    ticketInfo.add(s);
                 }
             }
         }
+    }
 
+    /**Displays list of airports
+     * Asks user for arrival and departure airport
+     * checks if inputs are duplicate, if true then
+     * resets both variables and asks again.
+     * Stores both values.
+     */
+    private void getRoute() {
         boolean flag = true;
         while (flag) {
             pickAirport.draw();
-            while (depAirport.isEmpty()) {
-                input = UI.getString();
+            while (ticketInfo.isEmpty()) {
+                String input = UI.getString();
                 for (String s : Reference.airportList) {
                     if (input.equalsIgnoreCase(s)) {
-                        depAirport = s;
+                        ticketInfo.add(s);
                     }
                 }
             }
 
             pickAirport.setTitle("Enter your arrival airport.");
             pickAirport.draw();
-            while (arrAirport.isEmpty()) {
-                input = UI.getString();
+            while (ticketInfo.isEmpty()) {
+                String input = UI.getString();
                 for (String s : Reference.airportList) {
                     if (input.equalsIgnoreCase(s)) {
-                        arrAirport = s;
+                        ticketInfo.add(s);
                     }
                 }
             }
 
-            if (depAirport.equalsIgnoreCase(arrAirport)) {
+            if (ticketInfo.get(2).equalsIgnoreCase(ticketInfo.get(1))) {
                 System.out.println("You entered the same airport for both inputs. Please enter valid information.");
-                depAirport = "";
-                arrAirport = "";
+                ticketInfo.clear();
             } else {
                 flag = false;
             }

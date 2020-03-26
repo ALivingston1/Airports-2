@@ -1,6 +1,6 @@
 package System.Aircraft.Airliner;
 
-import java.util.ArrayList;
+import System.Aircraft.IPerson;
 
 public class Passenger implements IPerson {
     private String name;

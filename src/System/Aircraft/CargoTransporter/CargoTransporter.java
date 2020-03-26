@@ -1,10 +1,11 @@
 package System.Aircraft.CargoTransporter;
 
 import System.Aircraft.CargoTransporter.Package;
+import System.Aircraft.IAircraft;
 
 import java.util.ArrayList;
 
-public class CargoTransporter {
+public class CargoTransporter implements IAircraft {
 
 
     private String make;
@@ -34,12 +35,17 @@ public class CargoTransporter {
         return model;
     }
 
+    @Override
+    public double getWeightCapacity() {
+        return 0;
+    }
+
     public Double getCapacity(){
         return capacity;
     }
 
     public int[] getCargo() {
-        return package;
+        return cargo;
     }
 
 }

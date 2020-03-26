@@ -1,4 +1,4 @@
-package System.Aircraft.Airliner;
+package System.Aircraft;
 
 public interface IPerson {
     public String getName();
