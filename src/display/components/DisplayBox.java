@@ -1,9 +1,9 @@
-package display.components;
+package Display.components;
 
 import java.util.ArrayList;
 import util.UI;
 
-public class DisplayBox implements IDisplayComponent {
+public class DisplayBox implements display.components.IDisplayComponent {
     private String title;
     private int sections;
     private ArrayList<String> data;
