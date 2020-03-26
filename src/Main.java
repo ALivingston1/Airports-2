@@ -1,7 +1,6 @@
-import display.admin.MenuScreen;
-import display.customer.BuyTicketScreen;
-
-import java.util.Scanner;
+import display.screens.AdminScreen;
+import display.screens.BuyTicketScreen;
+import util.UI;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,14 +11,15 @@ public class Main {
     }
 
     public static void getResponse() {
-        Scanner input = new Scanner(System.in);
-        String response = input.next();
+        String response = UI.getString();
 
         if (response.equalsIgnoreCase("Customer") || response.equalsIgnoreCase("1")) {
             BuyTicketScreen screen = new BuyTicketScreen();
+            UI.clearScreen();
             screen.open();
         } else if (response.equalsIgnoreCase("Admin") || response.equalsIgnoreCase("2")) {
-            MenuScreen screen = new MenuScreen();
+            AdminScreen screen = new AdminScreen();
+            UI.clearScreen();
             screen.open();
         } else if (response.equalsIgnoreCase("Exit") || response.equalsIgnoreCase("3")) {
             System.out.println("Closing...");

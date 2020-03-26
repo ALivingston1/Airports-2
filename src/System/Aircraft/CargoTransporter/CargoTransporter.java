@@ -1,16 +1,15 @@
 package System.Aircraft.CargoTransporter;
 
 import System.Aircraft.CargoTransporter.Package;
-import System.Aircraft.IAircraft;
 
 import java.util.ArrayList;
 
-public class CargoTransporter implements IAircraft {
+public class CargoTransporter {
 
 
     private String make;
     private String model;
-    private double capacity;
+    private Double capacity;
 
     private int[] cargo;
 
@@ -35,12 +34,12 @@ public class CargoTransporter implements IAircraft {
         return model;
     }
 
-    public double getWeightCapacity(){
+    public Double getCapacity(){
         return capacity;
     }
 
     public int[] getCargo() {
-        return cargo;
+        return package;
     }
 
 }

@@ -1,6 +1,8 @@
 package display.components;
 
-abstract class AbstractScreen implements IDisplay {
+import java.util.Queue;
+
+public abstract class AbstractScreen {
     public int width;
     public int height;
 
@@ -11,6 +13,6 @@ abstract class AbstractScreen implements IDisplay {
     };
 
     public int getHeight() {
-        return width;
+        return height;
     };
 }

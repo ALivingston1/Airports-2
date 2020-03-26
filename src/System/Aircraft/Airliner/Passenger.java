@@ -7,7 +7,7 @@ public class Passenger implements IPerson {
     private boolean ginger;
     private String seat;
 
-    private ArrayList<Luggage> luggage;
+//    private ArrayList<Luggage> luggage;
 
 
     Passenger(String name,boolean ginger,String seat,int luggage){
