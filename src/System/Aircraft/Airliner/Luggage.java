@@ -4,7 +4,18 @@ import System.Aircraft.CargoTransporter.Package;
 
 public class Luggage extends Package {
 
-    public Luggage(double weight, String destination) {
-        super(weight, destination);
+    private String owner;
+
+
+    Luggage(double weight,String destination,String owner){
+        super(weight,destination);
+        this.owner=owner;
+
     }
+
+    public String getOwner(){
+        return owner;
+    }
+
+
 }

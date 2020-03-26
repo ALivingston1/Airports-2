@@ -7,10 +7,9 @@ import java.util.ArrayList;
 
 public class CargoTransporter implements IAircraft {
 
-
     private String make;
     private String model;
-    private Double capacity;
+    private double capacity;
 
     private int[] cargo;
 
@@ -35,12 +34,7 @@ public class CargoTransporter implements IAircraft {
         return model;
     }
 
-    @Override
-    public double getWeightCapacity() {
-        return 0;
-    }
-
-    public Double getCapacity(){
+    public double getWeightCapacity(){
         return capacity;
     }
 
@@ -49,6 +43,5 @@ public class CargoTransporter implements IAircraft {
     }
 
 }
-
 
 
