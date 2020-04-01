@@ -1,6 +1,6 @@
-package System.Aircraft.Airliner;
+package system.aircraft.airliner;
 
-import System.Aircraft.IPerson;
+import system.aircraft.IPerson;
 
 public class Passenger implements IPerson {
     private String name;

@@ -1,7 +1,7 @@
-package System.Aircraft.Airliner;
+package system.aircraft.airliner;
 
-import System.Aircraft.IAircraft;
-import System.Aircraft.IPerson;
+import system.aircraft.IAircraft;
+import system.aircraft.IPerson;
 
 import java.util.ArrayList;
 

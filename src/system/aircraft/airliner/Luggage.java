@@ -1,6 +1,6 @@
-package System.Aircraft.Airliner;
+package system.aircraft.airliner;
 
-import System.Aircraft.CargoTransporter.Package;
+import system.aircraft.cargotransporter.Package;
 
 public class Luggage extends Package {
 

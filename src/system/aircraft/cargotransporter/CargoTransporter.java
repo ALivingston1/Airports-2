@@ -1,9 +1,6 @@
-package System.Aircraft.CargoTransporter;
+package system.aircraft.cargotransporter;
 
-import System.Aircraft.CargoTransporter.Package;
-import System.Aircraft.IAircraft;
-
-import java.util.ArrayList;
+import system.aircraft.IAircraft;
 
 public class CargoTransporter implements IAircraft {
 

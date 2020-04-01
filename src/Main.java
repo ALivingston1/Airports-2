@@ -15,11 +15,9 @@ public class Main {
 
         if (response.equalsIgnoreCase("Customer") || response.equalsIgnoreCase("1")) {
             BuyTicketScreen screen = new BuyTicketScreen();
-            UI.clearScreen();
             screen.open();
         } else if (response.equalsIgnoreCase("Admin") || response.equalsIgnoreCase("2")) {
             AdminScreen screen = new AdminScreen();
-            UI.clearScreen();
             screen.open();
         } else if (response.equalsIgnoreCase("Exit") || response.equalsIgnoreCase("3")) {
             System.out.println("Closing...");

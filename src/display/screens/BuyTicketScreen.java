@@ -2,62 +2,62 @@ package display.screens;
 
 import display.components.AbstractBoxScreen;
 import display.components.DisplayBox;
+import system.Ticket;
 import util.Reference;
 import util.UI;
-
-import java.util.ArrayList;
 
 public class BuyTicketScreen extends AbstractBoxScreen {
     private DisplayBox bookFlight;
     private DisplayBox pickAirline;
     private DisplayBox pickAirport;
-    private DisplayBox ticket;
 
-    private ArrayList<String> ticketInfo;
+    public Ticket ticket;
 
     public BuyTicketScreen() {
-        ticketInfo = new ArrayList<>();
+        ticket = new Ticket();
 
         //Creates new display box components with for various actions within screen
         bookFlight = new DisplayBox("Book A Flight");
-        addBox(bookFlight);
-
         pickAirline = new DisplayBox("Which airline would you like to fly with?");
-        for (String s : Reference.airlineList) {
-            pickAirline.addData(s);
-        }   //Add all of the airline options from the reference list
-        addBox(pickAirline);
-
         pickAirport = new DisplayBox("Enter your departure airport.");
-        for (int j = 0; j < (Reference.airportList.length * 3) / ((getMaxScreenWidth() / 4) - 1); j++) {
 
-            String[] temp = Reference.airportList;
-            String s = "";
-            for (int i = j; i < (getMaxScreenWidth() / 4) - 1; i++) {
-                s = s + temp[i];
-            }
-            pickAirport.addData(s);
-        }
+        //Adds each display box to the list of boxes in the screen
+        addBox(bookFlight);
+        addBox(pickAirline);
         addBox(pickAirport);
 
-        ticket = new DisplayBox("Your ticket information.");
+        //Add all of the data to each display box
+        for (String s : Reference.airlineList) {
+            pickAirline.addData(s);
+        }
 
-        //Finds the longest string contained in this screen and sets it as the width
-        getMaxScreenWidth();
+        String prev = "";
+        int section = 1;
+        for (String curr : Reference.airportList) {
+            //If there are 0 or 1 section(s), then it adds a new one with the airport name in it.
+            if (pickAirport.getNumSections() == 1 || (prev.length() + curr.length() + 1) > getMaxScreenWidth()) {
+                pickAirport.addData(curr + " ");
+                prev = curr + " ";
+                section++;
+            } else {
+                pickAirport.setData(section, prev + curr + " ");
+                prev+= curr + " ";
+            }
+        }
     }
 
     @Override
     public void open() {
+        //Finds the longest string contained in this screen and sets it as the width
+        getMaxScreenWidth();
+
         UI.clearScreen();
 
         bookFlight.draw();
         getAirline();
         getRoute();
+        ticket.setPrice(UI.getRandomInt(400, 900));
 
-        ticketInfo.add("Ticket Price: $" + UI.getRandomInt(400, 900));
-        for (String s: ticketInfo) {
-            ticket.addData(s);
-        }
         ticket.draw();
     }
 
@@ -67,11 +67,12 @@ public class BuyTicketScreen extends AbstractBoxScreen {
      */
     private void getAirline() {
         pickAirline.draw();
-        while (ticketInfo.isEmpty()) {
+        while (ticket.getAirline() == null) {
+            System.out.print("Select: ");
             String input = UI.getString();
             for (String s : Reference.airlineList) {
                 if (input.equalsIgnoreCase(s)) {
-                    ticketInfo.add(s);
+                    ticket.setAirline(s);
                 }
             }
         }
@@ -87,29 +88,32 @@ public class BuyTicketScreen extends AbstractBoxScreen {
         boolean flag = true;
         while (flag) {
             pickAirport.draw();
-            while (ticketInfo.isEmpty()) {
+            while (ticket.getDepAirport() == null || ticket.getDepAirport() == "") {
+                System.out.print("Select: ");
                 String input = UI.getString();
                 for (String s : Reference.airportList) {
                     if (input.equalsIgnoreCase(s)) {
-                        ticketInfo.add(s);
+                        ticket.setDepAirport(s);
                     }
                 }
             }
 
             pickAirport.setTitle("Enter your arrival airport.");
             pickAirport.draw();
-            while (ticketInfo.isEmpty()) {
+            while (ticket.getArrAirport() == null || ticket.getArrAirport() == "") {
+                System.out.print("Select: ");
                 String input = UI.getString();
                 for (String s : Reference.airportList) {
                     if (input.equalsIgnoreCase(s)) {
-                        ticketInfo.add(s);
+                        ticket.setArrAirport(s);
                     }
                 }
             }
 
-            if (ticketInfo.get(2).equalsIgnoreCase(ticketInfo.get(1))) {
+            if (ticket.getArrAirport().equalsIgnoreCase(ticket.getDepAirport())) {
                 System.out.println("You entered the same airport for both inputs. Please enter valid information.");
-                ticketInfo.clear();
+                ticket.clear();
+                UI.clearScreen();
             } else {
                 flag = false;
             }
@@ -129,7 +133,7 @@ public class BuyTicketScreen extends AbstractBoxScreen {
                 width = box.getTitle().length();
             }
 
-            for (String s: box.getData()) { //Checks each line of data contained in the box
+            for (String s: box.data) { //Checks each line of data contained in the box
                 if (s.length() > width) {
                     width = s.length();
                 }

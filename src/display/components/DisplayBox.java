@@ -4,20 +4,16 @@ import java.util.ArrayList;
 import util.UI;
 
 public class DisplayBox implements IDisplayComponent {
-    private String title;
-    private int sections;
-    private ArrayList<String> data;
+    public ArrayList<String> data;
 
-    public DisplayBox(String title, int sections) {
-        this.title = title;
-        this.sections = sections;
+    public DisplayBox(String title) {
         data = new ArrayList<>();
+        data.add(title);
     }
 
     public DisplayBox(String title, String ...strings) {
-        this.title = title;
-        sections = strings.length;
         data = new ArrayList<>();
+        data.add(title);
 
         for (String s: strings) {
             addData(s);
@@ -29,7 +25,7 @@ public class DisplayBox implements IDisplayComponent {
      * @param title
      */
     public void setTitle(String title) {
-        this.title = title;
+        data.set(0, title);
     }
 
     /**
@@ -37,15 +33,15 @@ public class DisplayBox implements IDisplayComponent {
      * @return String title
      */
     public String getTitle() {
-        return title;
+        return data.get(0);
     }
 
     /**
-     * Gets Number of Sections in box
+     * Gets Number of Sections in box, includes title box
      * @return int sections
      */
     public int getNumSections() {
-        return sections;
+        return data.size();
     }
 
     /**
@@ -54,15 +50,26 @@ public class DisplayBox implements IDisplayComponent {
      */
     public void addData(String string) {
         data.add(string);
-        sections++;
     }
 
     /**
-     * Getter for data in box
-     * @return ArrayList<String></String>
+     * Sets the data for specified section.
+     * Title is index of 0, and sections
+     * are everything above. Throws NullPointerException
+     * if the section index does not exist.
+     * @param section
+     * @param data
      */
-    public ArrayList<String> getData() {
-        return data;
+    public void setData(int section, String data) throws NullPointerException{
+        if (section <= data.length() && section >= 0) {
+            if (section == 0) {
+                setTitle(data);
+            } else {
+                this.data.set(section - 1, data);
+            }
+        } else {
+            throw new NullPointerException("Section " + section + " does not exist.");
+        }
     }
 
     /**
@@ -71,12 +78,12 @@ public class DisplayBox implements IDisplayComponent {
      */
     public void popData(String string) {
         data.remove(string);
-        sections--;
     }
 
     @Override
     public void draw() {
         int len = UI.getMaxStringLen(data);
+        String title = data.get(0);
         if (len < title.length()) {
             len = title.length();
         }
@@ -85,8 +92,8 @@ public class DisplayBox implements IDisplayComponent {
         System.out.println("|" + " ".repeat(((len + 2) - title.length()) / 2) + title + " ".repeat(((len + 2) - title.length()) / 2) + "|");
         System.out.println("-".repeat(len + 4));
 
-        if (sections > 0) {
-            for (int i = 0; i < sections; i++) {
+        if (data.size() > 1) {
+            for (int i = 1; i < data.size(); i++) {
                 System.out.println("|" + " ".repeat(((len + 3) - data.get(i).length()) / 2) + data.get(i) + " ".repeat(((len + 2) - data.get(i).length()) / 2) + "|");
             }
             System.out.println("-".repeat(len + 4));

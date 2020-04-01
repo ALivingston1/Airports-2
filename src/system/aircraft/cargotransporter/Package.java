@@ -1,4 +1,4 @@
-package System.Aircraft.CargoTransporter;
+package system.aircraft.cargotransporter;
 
 public class Package {
 

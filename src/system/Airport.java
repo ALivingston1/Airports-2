@@ -1,6 +1,6 @@
-package System;
+package system;
 
-import System.Aircraft.IAircraft;
+import system.aircraft.IAircraft;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package System.Aircraft;
+package system.aircraft;
 
 public class Crew implements IPerson {
     private String name;
