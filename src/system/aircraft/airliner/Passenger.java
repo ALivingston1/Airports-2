@@ -7,13 +7,21 @@ public class Passenger implements IPerson {
     private boolean ginger;
     private String seat;
 
-//    private ArrayList<Luggage> luggage;
+    private int[] luggage;
 
 
-    Passenger(String name,boolean ginger,String seat,int luggage){
+    /**
+     * Passenger constructor creates a passenger inhereted from  person
+     * @param name name of passenger
+     * @param ginger if the person is ginger to take away from the count of souls on the plane
+     * @param seat which seat number is assigned to the passenger
+     * @param luggage the array of luggage that they have
+     */
+    Passenger(String name,boolean ginger,String seat,int[] luggage){
         this.name=name;
         this.ginger=ginger;
         this.seat=seat;
+        this.luggage=luggage;
         
     }
 
