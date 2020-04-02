@@ -62,6 +62,8 @@ public class UI {
         while (outOfBounds) {
             if (temp <= min) {
                 temp = r.nextInt(max);
+            } else {
+                outOfBounds = false;
             }
         }
         return temp;

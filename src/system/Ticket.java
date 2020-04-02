@@ -8,10 +8,6 @@ import util.Reference;
 import java.util.ArrayList;
 
 public class Ticket implements IDisplayComponent {
-    private String airline;
-    private String arrAirport;
-    private String depAirport;
-    private int price;
     private ArrayList<String> info;
 
     private Passenger customer;
@@ -19,61 +15,84 @@ public class Ticket implements IDisplayComponent {
 
     public Ticket() {
         info = new ArrayList();
-        if (customer != null) {
-            info.add(customer.getName());
-        } else {
-            System.out.println("System error: Specific User is not logged in.\n");
-        }
-        info.add(airline);
-        info.add(arrAirport);
-        info.add(depAirport);
-        info.add(Integer.toString(price));
+        displayBox = new DisplayBox("");
 
-        displayBox = new DisplayBox("Your ticket information.");
+        info.add(displayBox.data.get(0));
     }
 
     public void setAirline(String airline) {
         for (int i = 0; i < Reference.airlineList.length; i++) {
             if (airline.equals(Reference.airlineList[i])) {
-                this.airline = airline;
+                if (info.size() < 2) {
+                    info.add(1, airline);
+                    displayBox.addData("Airline: " + info.get(0));
+                } else {
+                    info.set(1, airline);
+                }
             }
         }
     }
 
     public String getAirline() {
-        return airline;
+        return info.get(1);
     }
 
     public void setDepAirport(String depAirport) {
         for (int i = 0; i < Reference.airportList.length; i++) {
             if (depAirport.equals(Reference.airportList[i])) {
-                this.depAirport = depAirport;
+                if (info.size() < 3) {
+                    info.add(2, depAirport);
+                    displayBox.addData("Departure Airport: " + info.get(2));
+                } else {
+                    info.set(2, depAirport);
+                }
             }
         }
     }
 
     public String getDepAirport() {
-        return depAirport;
+        return info.get(2);
     }
 
     public void setArrAirport(String arrAirport) {
         for (int i = 0; i < Reference.airportList.length; i++) {
             if (arrAirport.equals(Reference.airportList[i])) {
-                this.arrAirport = arrAirport;
+                if (info.size() < 4) {
+                    info.add(3, arrAirport);
+                    displayBox.addData("Arrival Airport: " + info.get(1));
+                } else {
+                    info.set(3, arrAirport);
+                }
             }
         }
     }
 
     public String getArrAirport() {
-        return arrAirport;
+        return info.get(3);
     }
 
     public void setPrice(int price) {
-        this.price = price;
+        if (info.size() < 5) {
+            info.add(4, Integer.toString(price));
+            displayBox.addData("Ticket Price: $" + info.get(3));
+        } else {
+            info.set(4, Integer.toString(price));
+        }
     }
 
-    public int getPrice() {
-        return price;
+    public String getPrice() {
+        return info.get(4);
+    }
+
+    private String getCustomerName() {
+        String name;
+        if (customer == null) {
+            System.out.println("System error: Specific User is not logged in.\n");
+            name = "undefined";
+        } else {
+            name = customer.getName();
+        }
+        return name;
     }
 
     /**
@@ -83,41 +102,27 @@ public class Ticket implements IDisplayComponent {
      * Sets title to similar structure.
      */
     private void refreshDisplay() {
-        for (String data: info) {
-            if (data.isEmpty() || data == null) {
-                switch (info.indexOf(data)) {
-                    case 0:
-                        displayBox.setTitle("Customer Undefined" + "'s Ticket");
+        for (int i = 0; i < info.size(); i++) {
+            switch (i) {
+                case 0:
+                    displayBox.setTitle(getCustomerName() + "'s Ticket");
+                    break;
 
-                    case 1:
-                        displayBox.addData("Airline: Not chosen");
+                case 1:
+                    displayBox.setData(1, "Airline: " + info.get(1));
+                    break;
 
-                    case 2:
-                        displayBox.addData("Arrival Airport: Not chosen");
+                case 2:
+                    displayBox.setData(2, "Departure Airport: " + info.get(2));
+                    break;
 
-                    case 3:
-                        displayBox.addData("Departure Airport: Not chosen");
+                case 3:
+                    displayBox.setData(3, "Arrival Airport: " + info.get(3));
+                    break;
 
-                    case 4:
-                        displayBox.addData("Ticket Price: Not chosen");
-                }
-            } else {
-                switch (info.indexOf(data)) {
-                    case 0:
-                        displayBox.setTitle(customer.getName() + "'s Ticket");
-
-                    case 1:
-                        displayBox.setData(1, "Airline: " + airline);
-
-                    case 2:
-                        displayBox.setData(2,"Arrival Airport: " + arrAirport);
-
-                    case 3:
-                        displayBox.setData(3, "Departure Airport: " + depAirport);
-
-                    case 4:
-                        displayBox.setData(4,"Ticket Price: $" + price);
-                }
+                case 4:
+                    displayBox.setData(4, "Ticket Price: $" + info.get(4));
+                    break;
             }
         }
     }
@@ -126,10 +131,7 @@ public class Ticket implements IDisplayComponent {
      * Wipes ticket data including graphics
      */
     public void clear() {
-        airline = "";
-        arrAirport = "";
-        depAirport = "";
-        price = 0;
+        info.clear();
     }
 
     @Override

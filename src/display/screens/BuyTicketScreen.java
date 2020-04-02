@@ -6,6 +6,8 @@ import system.Ticket;
 import util.Reference;
 import util.UI;
 
+import java.util.Scanner;
+
 public class BuyTicketScreen extends AbstractBoxScreen {
     private DisplayBox bookFlight;
     private DisplayBox pickAirline;
@@ -32,7 +34,7 @@ public class BuyTicketScreen extends AbstractBoxScreen {
         }
 
         String prev = "";
-        int section = 1;
+        int section = 0;
         for (String curr : Reference.airportList) {
             //If there are 0 or 1 section(s), then it adds a new one with the airport name in it.
             if (pickAirport.getNumSections() == 1 || (prev.length() + curr.length() + 1) > getMaxScreenWidth()) {
@@ -46,18 +48,23 @@ public class BuyTicketScreen extends AbstractBoxScreen {
         }
     }
 
+    /**
+     * Every time screen is opened
+     * gets the maximum screen width
+     * clears the console
+     * gets all variables needed for
+     * the ticket
+     * displays the ticket
+     */
     @Override
     public void open() {
-        //Finds the longest string contained in this screen and sets it as the width
-        getMaxScreenWidth();
-
         UI.clearScreen();
 
+        getMaxScreenWidth();    //Finds longest string in the screen currently.
         bookFlight.draw();
         getAirline();
         getRoute();
         ticket.setPrice(UI.getRandomInt(400, 900));
-
         ticket.draw();
     }
 
@@ -67,12 +74,19 @@ public class BuyTicketScreen extends AbstractBoxScreen {
      */
     private void getAirline() {
         pickAirline.draw();
-        while (ticket.getAirline() == null) {
-            System.out.print("Select: ");
+
+        boolean notValid = true;
+        System.out.print("Select: ");
+        while (notValid) {
             String input = UI.getString();
             for (String s : Reference.airlineList) {
                 if (input.equalsIgnoreCase(s)) {
                     ticket.setAirline(s);
+                    notValid = false;
+                    break;
+                } else {
+                    System.out.print("Try again: ");
+                    break;
                 }
             }
         }
@@ -88,34 +102,52 @@ public class BuyTicketScreen extends AbstractBoxScreen {
         boolean flag = true;
         while (flag) {
             pickAirport.draw();
-            while (ticket.getDepAirport() == null || ticket.getDepAirport() == "") {
-                System.out.print("Select: ");
+
+            boolean notValid = true;
+            System.out.print("Select: ");
+            while (notValid) {
                 String input = UI.getString();
                 for (String s : Reference.airportList) {
                     if (input.equalsIgnoreCase(s)) {
                         ticket.setDepAirport(s);
+                        notValid = false;
+                        break;
+                    } else {
+                        System.out.print("Try again: ");
+                        break;
                     }
                 }
             }
 
             pickAirport.setTitle("Enter your arrival airport.");
+
             pickAirport.draw();
-            while (ticket.getArrAirport() == null || ticket.getArrAirport() == "") {
-                System.out.print("Select: ");
+            notValid = true;
+            System.out.print("Select: ");
+            while (notValid) {
                 String input = UI.getString();
                 for (String s : Reference.airportList) {
                     if (input.equalsIgnoreCase(s)) {
                         ticket.setArrAirport(s);
+
+                        /**
+                         * Checks for duplicate inputs
+                         */
+                        if (ticket.getArrAirport().equalsIgnoreCase(ticket.getDepAirport())) {
+                            System.out.println("You entered the same airport for both inputs. Please enter valid information.");
+                            ticket.setDepAirport("");
+                            ticket.setArrAirport("");
+                            pickAirport.draw();
+                        } else {
+                            notValid = false;
+                            flag = false;
+                            break;
+                        }
+                    } else {
+                        System.out.print("Try again: ");
+                        break;
                     }
                 }
-            }
-
-            if (ticket.getArrAirport().equalsIgnoreCase(ticket.getDepAirport())) {
-                System.out.println("You entered the same airport for both inputs. Please enter valid information.");
-                ticket.clear();
-                UI.clearScreen();
-            } else {
-                flag = false;
             }
         }   //Gets departure and arrival airports, checks for duplicates
     }

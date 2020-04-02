@@ -65,7 +65,7 @@ public class DisplayBox implements IDisplayComponent {
             if (section == 0) {
                 setTitle(data);
             } else {
-                this.data.set(section - 1, data);
+                this.data.set(section, data);
             }
         } else {
             throw new NullPointerException("Section " + section + " does not exist.");
