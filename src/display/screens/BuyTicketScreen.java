@@ -16,8 +16,8 @@ public class BuyTicketScreen extends AbstractBoxScreen {
 
     public Ticket ticket;
 
-    public BuyTicketScreen() {
-        super(null);
+    public BuyTicketScreen(AbstractScreen screen) {
+        super(screen);
         ticket = new Ticket();
 
         //Creates new display box components with for various actions within screen
@@ -68,6 +68,8 @@ public class BuyTicketScreen extends AbstractBoxScreen {
         getRoute();
         ticket.setPrice(UI.getRandomInt(400, 900));
         ticket.draw();
+
+        close();
     }
 
     /**Displays the Airline information

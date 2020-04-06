@@ -8,6 +8,17 @@ public class CargoTransporter implements IAircraft {
     private String origin;
     private String destination;
 
+    @Override
+    public String getFlightNumber() {
+        return flightNumber;
+    }
+
+    public void setFlightNumber(String flightNumber) {
+        this.flightNumber = flightNumber;
+    }
+
+    private String flightNumber;
+
     public void setMake(String make) {
         this.make = make;
     }

@@ -6,4 +6,10 @@ public interface IAircraft {
     String getModel();
 
     double getWeightCapacity();
+
+    String getOrigin();
+
+    String getDestination();
+
+    String getFlightNumber();
 }

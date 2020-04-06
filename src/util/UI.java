@@ -60,7 +60,7 @@ public class UI {
 
         boolean outOfBounds = true;
         while (outOfBounds) {
-            if (temp <= min) {
+            if (temp < min) {
                 temp = r.nextInt(max);
             } else {
                 outOfBounds = false;

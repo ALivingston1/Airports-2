@@ -1,5 +1,6 @@
 import display.screens.AdminScreen;
 import display.screens.BuyTicketScreen;
+import display.screens.MainScreen;
 import system.Airport;
 import system.aircraft.airliner.Airliner;
 import system.aircraft.cargotransporter.CargoTransporter;
@@ -9,33 +10,20 @@ import util.UI;
 public class Main {
     public static void main(String[] args) {
         initSystem();
-
-        System.out.println("Which screen would you like to enter?");
-        System.out.println("(1) Customer" + " ".repeat(6) + "(2) Admin" + " ".repeat(6) + "(3) Exit");
-
-        getResponse();
-    }
-
-    public static void getResponse() {
-        String response = UI.getString();
-
-        if (response.equalsIgnoreCase("Customer") || response.equalsIgnoreCase("1")) {
-            BuyTicketScreen screen = new BuyTicketScreen();
-            screen.open();
-        } else if (response.equalsIgnoreCase("Admin") || response.equalsIgnoreCase("2")) {
-            AdminScreen screen = new AdminScreen();
-            screen.open();
-        } else if (response.equalsIgnoreCase("Exit") || response.equalsIgnoreCase("3")) {
-            System.out.println("Closing...");
-        } else {
-            System.out.println("Please type a valid response.");
-            getResponse();
-        }
+        MainScreen main = new MainScreen();
+        main.open();
     }
 
     public static void initSystem() {
         for (String s : Reference.airportList) {
-            Reference.airports.add(new Airport(s));
+            Airport temp = new Airport(s);
+            int rand = UI.getRandomInt(0, 1);
+            if (rand == 0) {
+                temp.isTowered(true);
+            }
+            rand = UI.getRandomInt(50, 300);
+            temp.setCapacity(rand);
+            Reference.airports.add(temp);
         }
 
         for (Airport a : Reference.airports) {
@@ -60,6 +48,8 @@ public class Main {
                             rand = UI.getRandomInt(110, 200);
                             airliner.setPassengerCapacity(rand);
 
+                            a.addAircraft(airliner);
+                            Reference.aircraftList.add(airliner);
                         } else {
                             CargoTransporter cargoTransporter = new CargoTransporter();
                             cargoTransporter.setOrigin(Reference.airports.get(i).getIdentifier());
@@ -68,8 +58,11 @@ public class Main {
                             cargoTransporter.setMake(Reference.make[rand]);
                             rand = UI.getRandomInt(0, 8);
                             cargoTransporter.setModel(Reference.model[rand]);
-//                            rand = UI.getRandomInt(110, 200);
-//                            cargoTransporter.setCapacity(rand);
+                            rand = UI.getRandomInt(200, 2000);
+                            cargoTransporter.setCapacity(rand);
+
+                            a.addAircraft(cargoTransporter);
+                            Reference.aircraftList.add(cargoTransporter);
                         }
                     }
                 }

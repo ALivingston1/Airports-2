@@ -4,6 +4,7 @@ import display.components.AbstractBoxScreen;
 import display.components.AbstractScreen;
 import display.components.DisplayBox;
 import system.Airport;
+import system.aircraft.IAircraft;
 import util.Reference;
 import util.UI;
 
@@ -22,20 +23,26 @@ public class ViewAirportScreen extends AbstractBoxScreen {
 
         getAirport();
         displayBox.draw();
-        System.out.println("Would you like to view its aircraft?");
+        System.out.println("Would you like to list its aircraft?");
+        UI.draw("(1) Yes", "(2) No");
         String response = UI.getString();
-        if (response.equalsIgnoreCase("Yes") || response == Integer.toString(1)) {
-//            ViewAircraftScreen viewAircraft = new ViewAircraftScreen(this);
-        } else {
-            UI.draw("(1) View Another", "(2) Exit");
-            response = UI.getString();
-
-            if (response.equalsIgnoreCase("View another") || response == Integer.toString(1)) {
-                ViewScreen viewScreen = new ViewScreen(this);
-                viewScreen.open();
-            } else if (response.equalsIgnoreCase("Exit") || response == Integer.toString(2)) {
-                super.close();
+        if (response.equalsIgnoreCase("Yes") || response.equalsIgnoreCase(Integer.toString(1))) {
+            if (airport.getAircraft().size() == 0) {
+                System.out.println("No aircraft present at this airport.");
             }
+            for (IAircraft a : airport.getAircraft()) {
+                System.out.print(a.getFlightNumber() + " ");
+            }
+        }
+
+        UI.draw("(1) View Another", "(2) Exit");
+        response = UI.getString();
+
+        if (response.equalsIgnoreCase("View another") || response.equalsIgnoreCase(Integer.toString(1))) {
+            ViewScreen viewScreen = new ViewScreen(this);
+            viewScreen.open();
+        } else if (response.equalsIgnoreCase("Exit") || response.equalsIgnoreCase(Integer.toString(2))) {
+            super.close();
         }
     }
 

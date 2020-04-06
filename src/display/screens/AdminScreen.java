@@ -6,8 +6,8 @@ import util.UI;
 
 public class AdminScreen extends AbstractScreen {
 
-    public AdminScreen() {
-        super(null);
+    public AdminScreen(AbstractScreen screen) {
+        super(screen);
     }
 
     @Override
@@ -25,6 +25,7 @@ public class AdminScreen extends AbstractScreen {
             view.open();
         } else if (response.equalsIgnoreCase("Exit") || response.equalsIgnoreCase("2")) {
             System.out.println("Closing...");
+            close();
         } else {
             System.out.println("Please type a valid response.");
             open();

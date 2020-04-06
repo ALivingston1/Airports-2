@@ -28,6 +28,10 @@ public class Airport {
         return towered;
     }
 
+    public void isTowered(boolean b) {
+        towered = b;
+    }
+
     public int getCapacity() {
         return capacity;
     }
@@ -52,4 +56,7 @@ public class Airport {
         return aircraft;
     }
 
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
 }
