@@ -19,12 +19,11 @@ public class CargoTransporter implements IAircraft {
      * @param cargo array of what cargo the plane will contain
      */
 
-    CargoTransporter(String make,double capacity,String model,int[] cargo){
+    CargoTransporter(String make, double capacity, String model, int[] cargo){
         this.make=make;
         this.capacity=capacity;
         this.model=model;
         this.cargo=cargo;
-
     }
 
 

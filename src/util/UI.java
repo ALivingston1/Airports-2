@@ -77,4 +77,15 @@ public class UI {
         Scanner input = new Scanner(System.in);
         return input.next();
     }
+
+    /**
+     * Displays each string put into the method.
+     * @param strings
+     */
+    public static void draw(String ...strings) {
+        for (String s: strings) {
+            System.out.print(s + " ".repeat(6));
+        }
+        System.out.println();
+    }
 }

@@ -1,6 +1,7 @@
 package display.screens;
 
 import display.components.AbstractBoxScreen;
+import display.components.AbstractScreen;
 import display.components.DisplayBox;
 import system.Ticket;
 import util.Reference;
@@ -16,6 +17,7 @@ public class BuyTicketScreen extends AbstractBoxScreen {
     public Ticket ticket;
 
     public BuyTicketScreen() {
+        super(null);
         ticket = new Ticket();
 
         //Creates new display box components with for various actions within screen
@@ -103,14 +105,14 @@ public class BuyTicketScreen extends AbstractBoxScreen {
         while (flag) {
             pickAirport.draw();
 
-            boolean notValid = true;
+            boolean departure = true;
             System.out.print("Select: ");
-            while (notValid) {
+            while (departure) {
                 String input = UI.getString();
                 for (String s : Reference.airportList) {
                     if (input.equalsIgnoreCase(s)) {
                         ticket.setDepAirport(s);
-                        notValid = false;
+                        departure = false;
                         break;
                     } else {
                         System.out.print("Try again: ");
@@ -122,9 +124,9 @@ public class BuyTicketScreen extends AbstractBoxScreen {
             pickAirport.setTitle("Enter your arrival airport.");
 
             pickAirport.draw();
-            notValid = true;
+            boolean arrival = true;
             System.out.print("Select: ");
-            while (notValid) {
+            while (arrival) {
                 String input = UI.getString();
                 for (String s : Reference.airportList) {
                     if (input.equalsIgnoreCase(s)) {
@@ -138,14 +140,13 @@ public class BuyTicketScreen extends AbstractBoxScreen {
                             ticket.setDepAirport("");
                             ticket.setArrAirport("");
                             pickAirport.draw();
+                            System.out.print("Try again: ");
+                            break;
                         } else {
-                            notValid = false;
+                            arrival = false;
                             flag = false;
                             break;
                         }
-                    } else {
-                        System.out.print("Try again: ");
-                        break;
                     }
                 }
             }

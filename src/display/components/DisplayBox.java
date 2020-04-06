@@ -53,6 +53,14 @@ public class DisplayBox implements IDisplayComponent {
     }
 
     /**
+     * Allows user to add integer to the data as well
+     * @param i
+     */
+    public void addData(int i) {
+        data.add(Integer.toString(i));
+    }
+
+    /**
      * Sets the data for specified section.
      * Title is index of 0, and sections
      * are everything above. Throws NullPointerException
