@@ -17,6 +17,11 @@ public class ViewAircraftScreen extends AbstractBoxScreen {
         super(parent);
     }
 
+    public ViewAircraftScreen(AbstractScreen parent, IAircraft aircraft) {
+        super(parent);
+        this.aircraft = aircraft;
+    }
+
     @Override
     public void open() {
         super.open();

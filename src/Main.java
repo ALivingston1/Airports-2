@@ -7,6 +7,8 @@ import system.aircraft.cargotransporter.CargoTransporter;
 import util.Reference;
 import util.UI;
 
+import java.sql.Ref;
+
 public class Main {
     public static void main(String[] args) {
         initSystem();
@@ -48,6 +50,13 @@ public class Main {
                             rand = UI.getRandomInt(110, 200);
                             airliner.setPassengerCapacity(rand);
 
+                            rand = UI.getRandomInt(0000, 9999);
+                            for (int k = 0; k < Reference.airlineList.length; k++) {
+                                if (airliner.getAirline().equalsIgnoreCase(Reference.airlineList[k])) {
+                                    airliner.setFlightNumber(Reference.airlineAbbreviation[k] + rand);
+                                }
+                            }
+
                             a.addAircraft(airliner);
                             Reference.aircraftList.add(airliner);
                         } else {
@@ -60,6 +69,14 @@ public class Main {
                             cargoTransporter.setModel(Reference.model[rand]);
                             rand = UI.getRandomInt(200, 2000);
                             cargoTransporter.setCapacity(rand);
+
+                            rand = UI.getRandomInt(0000, 9999);
+                            int carrier = UI.getRandomInt(0, 1);
+                            if (carrier == 0) {
+                                cargoTransporter.setFlightNumber("UPS " + rand);
+                            } else {
+                                cargoTransporter.setFlightNumber("FED-EX ");
+                            }
 
                             a.addAircraft(cargoTransporter);
                             Reference.aircraftList.add(cargoTransporter);

@@ -35,10 +35,24 @@ public class ViewAirportScreen extends AbstractBoxScreen {
             }
         }
 
-        UI.draw("(1) View Another", "(2) Exit");
+        System.out.println("Would you like to view any of these?");
+        UI.draw("(1) Yes", "(2) No");
+        response = UI.getString();
+        if (response.equalsIgnoreCase("Yes") || response.equalsIgnoreCase(Integer.toString(1))) {
+            System.out.println("Which one?");
+
+            response = UI.getString();
+            for (IAircraft a : Reference.aircraftList) {
+                if (response.equalsIgnoreCase(a.getFlightNumber())) {
+                    ViewAircraftScreen viewAircraftScreen = new ViewAircraftScreen(this, a);
+                }
+            }
+        }
+
+        UI.draw("(1) View another airport", "(2) Exit");
         response = UI.getString();
 
-        if (response.equalsIgnoreCase("View another") || response.equalsIgnoreCase(Integer.toString(1))) {
+        if (response.equalsIgnoreCase("View another airport") || response.equalsIgnoreCase(Integer.toString(1))) {
             ViewScreen viewScreen = new ViewScreen(this);
             viewScreen.open();
         } else if (response.equalsIgnoreCase("Exit") || response.equalsIgnoreCase(Integer.toString(2))) {
