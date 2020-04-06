@@ -10,6 +10,9 @@ public class CargoTransporter implements IAircraft {
 
     private int[] cargo;
 
+    public CargoTransporter() {
+
+    }
 
     /**
      * Constructor to create a cargo plane
@@ -18,7 +21,6 @@ public class CargoTransporter implements IAircraft {
      * @param model model of aircraft
      * @param cargo array of what cargo the plane will contain
      */
-
     CargoTransporter(String make, double capacity, String model, int[] cargo){
         this.make=make;
         this.capacity=capacity;
