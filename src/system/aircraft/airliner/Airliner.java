@@ -8,8 +8,27 @@ import java.util.ArrayList;
 public class Airliner implements IAircraft {
     private String make;
     private String model;
+    private String airline;
+
+    public String getAirline() {
+        return airline;
+    }
+
+    public void setAirline(String airline) {
+        this.airline = airline;
+    }
+
     private String origin;
     private String destination;
+    private String flightNum;
+
+    public String getFlightNum() {
+        return flightNum;
+    }
+
+    public void setFlightNum(String flightNum) {
+        this.flightNum = flightNum;
+    }
 
     public String getOrigin() {
         return origin;
@@ -73,5 +92,21 @@ public class Airliner implements IAircraft {
 
     public ArrayList<IPerson> getSouls() {
         return souls;
+    }
+
+    public void setMake(String make) {
+        this.make = make;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public void setWeightCapacity(double weightCapacity) {
+        this.weightCapacity = weightCapacity;
+    }
+
+    public void setPassengerCapacity(int passengerCapacity) {
+        this.passengerCapacity = passengerCapacity;
     }
 }

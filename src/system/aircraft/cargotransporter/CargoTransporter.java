@@ -3,9 +3,43 @@ package system.aircraft.cargotransporter;
 import system.aircraft.IAircraft;
 
 public class CargoTransporter implements IAircraft {
-
     private String make;
     private String model;
+    private String origin;
+    private String destination;
+
+    public void setMake(String make) {
+        this.make = make;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public double getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(double capacity) {
+        this.capacity = capacity;
+    }
+
     private double capacity;
 
     private int[] cargo;
