@@ -2,6 +2,10 @@ package system.aircraft.airliner;
 
 import system.aircraft.IPerson;
 
+/**
+ * Should be passengers on board an aircraft
+ * with name, is ginger, seat number, and their luggage.
+ */
 public class Passenger implements IPerson {
     private String name;
     private boolean ginger;
@@ -25,18 +29,28 @@ public class Passenger implements IPerson {
         
     }
 
-
-
+    /**
+     * Getter for name
+     * @return
+     */
     @Override
     public String getName() {
         return name;
     }
 
+    /**
+     * Getter for is ginger
+     * @return
+     */
     @Override
     public boolean isGing() {
         return ginger;
     }
 
+    /**
+     * Getter for seat type
+     * @return
+     */
     public String getSeat(){
         return seat;
     }

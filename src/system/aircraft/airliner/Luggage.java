@@ -2,6 +2,9 @@ package system.aircraft.airliner;
 
 import system.aircraft.cargotransporter.Package;
 
+/**
+ * Each cargo transporter should have packages
+ */
 public class Luggage extends Package {
 
     private String owner;
@@ -18,6 +21,10 @@ public class Luggage extends Package {
 
     }
 
+    /**
+     * Gets the owner of the package
+     * @return
+     */
     public String getOwner(){
         return owner;
     }

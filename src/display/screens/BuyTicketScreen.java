@@ -9,6 +9,11 @@ import util.UI;
 
 import java.util.Scanner;
 
+/**
+ * User end of the UI
+ * Asks user for destination, departure, and airline
+ * they want to choose.
+ */
 public class BuyTicketScreen extends AbstractBoxScreen {
     private DisplayBox bookFlight;
     private DisplayBox pickAirline;
@@ -16,6 +21,10 @@ public class BuyTicketScreen extends AbstractBoxScreen {
 
     public Ticket ticket;
 
+    /**
+     * Sets a parent screen to open back up onto when current one closes.
+     * @param screen
+     */
     public BuyTicketScreen(AbstractScreen screen) {
         super(screen);
         ticket = new Ticket();

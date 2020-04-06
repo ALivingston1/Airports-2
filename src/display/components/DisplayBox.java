@@ -3,14 +3,33 @@ package display.components;
 import java.util.ArrayList;
 import util.UI;
 
+/**
+ * Helper component for part of a screen.
+ * Fancier display class for boxed information
+ * Includes a title, and sections (rows) of information.
+ * Can add, remove, and set the title and each section.
+ */
 public class DisplayBox implements IDisplayComponent {
     public ArrayList<String> data;
 
+    /**
+     * Constructor
+     * Has to include title
+     * @param title
+     */
     public DisplayBox(String title) {
         data = new ArrayList<>();
         data.add(title);
     }
 
+    /**
+     * Constructor
+     * Has to include a title and the data within it.
+     * (Allows for displaybox creation without any additional
+     * work done)
+     * @param title
+     * @param strings
+     */
     public DisplayBox(String title, String ...strings) {
         data = new ArrayList<>();
         data.add(title);
@@ -88,6 +107,11 @@ public class DisplayBox implements IDisplayComponent {
         data.remove(string);
     }
 
+    /**
+     * Actually draws the displaybox
+     * If the box has only a title, won't
+     * draw the sections.
+     */
     @Override
     public void draw() {
         int len = UI.getMaxStringLen(data);

@@ -8,15 +8,30 @@ import system.aircraft.IAircraft;
 import util.Reference;
 import util.UI;
 
+/**
+ * This class is the foundation for viewing an airport
+ * and lists each aircraft off if user selects to.
+ */
 public class ViewAirportScreen extends AbstractBoxScreen {
     private DisplayBox displayBox;
     private Airport airport;
 
+    /**
+     * Creates a new airport screen. With a parent screen to open back up when this is done being used.
+     * @param parent
+     */
     public ViewAirportScreen(AbstractScreen parent) {
         super(parent);
         displayBox = new DisplayBox("");
     }
 
+    /**
+     * Gets the airport the user wants.
+     * Displays the airport.
+     * Asks if the user wants a list of the aircraft in the airport.
+     * If there is no aircraft in the airport, it will tell the user.
+     * Asks if it user wants to view another airport, or exit.
+     */
     @Override
     public void open() {
         super.open();

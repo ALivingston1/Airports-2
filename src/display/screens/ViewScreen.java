@@ -4,11 +4,23 @@ import display.components.AbstractScreen;
 import display.components.DisplayBox;
 import util.UI;
 
+/**
+ * This is the foundation screen to view airport, aircraft, or passenger (WIP)
+ */
 public class ViewScreen extends AbstractScreen {
 
+    /**
+     * Sets a parent screen to open back up onto when current one closes.
+     * @param parent
+     */
     public ViewScreen(AbstractScreen parent) {
         super(parent);
     }
+
+    /**
+     * Asks user to select what object they want to view, then opens corresponding screen
+     * (Airport, Aircraft, Passenger (WIP).
+     */
     @Override
     public void open() {
         super.open();

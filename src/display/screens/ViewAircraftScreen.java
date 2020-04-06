@@ -10,18 +10,37 @@ import system.aircraft.cargotransporter.CargoTransporter;
 import util.Reference;
 import util.UI;
 
+/**
+ * This screen allows the user to view aircraft in a specified airport.
+ */
 public class ViewAircraftScreen extends AbstractBoxScreen {
     private IAircraft aircraft;
 
+    /**
+     * Sets a parent screen to open back up onto when current one closes.
+     * @param parent
+     */
     public ViewAircraftScreen(AbstractScreen parent) {
         super(parent);
     }
 
+    /**
+     * Sets a parent screen to open back up onto when current one closes.
+     * Will set the current aircraft to view by default.
+     * @param parent
+     * @param aircraft
+     */
     public ViewAircraftScreen(AbstractScreen parent, IAircraft aircraft) {
         super(parent);
         this.aircraft = aircraft;
     }
 
+    /**
+     * Will setup all of the display info for each
+     * aircraft. Will look at the reference list of all current
+     * airports in the system and then create semi-random aircraft based
+     * off of the data.
+     */
     @Override
     public void open() {
         super.open();

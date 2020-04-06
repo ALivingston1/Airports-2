@@ -4,8 +4,18 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * Static class for helpful things
+ * like getting user input for strings,
+ * integers,
+ * and can draw multiple strings with spacing in between.
+ * Also can get the mas length of an arraylist of strings.
+ */
 public class UI {
 
+    /**
+     * Private for safety to never make an object of this class.
+     */
     private UI() {
 
     }

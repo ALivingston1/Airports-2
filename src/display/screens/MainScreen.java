@@ -1,14 +1,27 @@
 package display.screens;
 
 import display.components.AbstractBoxScreen;
-import display.components.AbstractScreen;
 import util.UI;
 
+/**
+ * This is the debug screen for this project.
+ * Asks if we want to be a customer or an admin.
+ * Will open up the corresponding screen.
+ */
 public class MainScreen extends AbstractBoxScreen {
+
+    /**
+     * This is the main screen, so it won't need a parent screen
+     */
     public MainScreen() {
         super(null);
     }
 
+    /**
+     * Asks user to enter either "customer" or "admin" and will open
+     * up the corresponding display or else it will close the screen
+     * or ask to enter a new response if there is a typo.
+     */
     @Override
     public void open() {
         super.open();

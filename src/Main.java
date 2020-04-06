@@ -9,14 +9,28 @@ import util.UI;
 
 import java.sql.Ref;
 
+/**
+ * This programs allows the user to pretend to buy a
+ * plane ticket. It also allows the user to view a limit list
+ * of airports, get the airport information, and view each airport's
+ * aircraft and its information.
+ */
 public class Main {
+
+    /**
+     * Opens the main screen of the program and initializes the system as a whole.
+     * @param args
+     */
     public static void main(String[] args) {
         initSystem();
         MainScreen main = new MainScreen();
         main.open();
     }
 
-    public static void initSystem() {
+    /**
+     * Creates all airports, aircraft, etc. in the system and assigns their values semi-randomly
+     */
+    public static void initSystem({
         for (String s : Reference.airportList) {
             Airport temp = new Airport(s);
             int rand = UI.getRandomInt(0, 1);

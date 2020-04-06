@@ -5,6 +5,11 @@ import system.aircraft.IAircraft;
 
 import java.util.ArrayList;
 
+/**
+ * Reference class for current airports, aircraft, and
+ * includes static references for airport identifiers, airline list,
+ * make and models of aircraft within the system.
+ */
 public class Reference {
     public static String[] airportList = {"ATL", "LAX", "ORD", "DFW", "DEN", "JFK", "SFO", "SEA", "LAS", "MCO", "EWR", "CLT", "PHX", "IAH", "MIA", "BOS", "MSP", "FLL", "DTW", "PHL", "LGA", "BWI", "SLC", "SAN", "IAD", "DCA", "MDW", "TPA", "PDX", "HNL"};
     public static String[] airlineList = {"Spirit", "American", "United", "SouthWest"};
@@ -15,5 +20,8 @@ public class Reference {
 
     public static ArrayList<Airport> airports = new ArrayList<>();
 
+    /**
+     * Private constructor for safety.
+     */
     private Reference() {}
 }

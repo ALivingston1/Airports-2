@@ -7,12 +7,21 @@ import util.Reference;
 
 import java.util.ArrayList;
 
+/**
+ * Ticket is part of the display component
+ * This can be printed (displayed on screen via displaybox)
+ * Has a parent (customer)
+ * Has info (price, dep and arr airport, and airlien)
+ */
 public class Ticket implements IDisplayComponent {
     private ArrayList<String> info;
 
     private Passenger customer;
     private DisplayBox displayBox;
 
+    /**
+     * Create new ticket
+     */
     public Ticket() {
         info = new ArrayList();
         displayBox = new DisplayBox("");
@@ -20,6 +29,10 @@ public class Ticket implements IDisplayComponent {
         info.add(displayBox.data.get(0));
     }
 
+    /**
+     * Airline setter
+     * @param airline
+     */
     public void setAirline(String airline) {
         for (int i = 0; i < Reference.airlineList.length; i++) {
             if (airline.equals(Reference.airlineList[i])) {
@@ -33,10 +46,18 @@ public class Ticket implements IDisplayComponent {
         }
     }
 
+    /**
+     * Airline getter
+     * @return
+     */
     public String getAirline() {
         return info.get(1);
     }
 
+    /**
+     * DepAirport setter
+     * @param depAirport
+     */
     public void setDepAirport(String depAirport) {
         for (int i = 0; i < Reference.airportList.length; i++) {
             if (depAirport.equals(Reference.airportList[i])) {
@@ -50,10 +71,18 @@ public class Ticket implements IDisplayComponent {
         }
     }
 
+    /**
+     * depAirport getter
+     * @return
+     */
     public String getDepAirport() {
         return info.get(2);
     }
 
+    /**
+     * arrAirport setter
+     * @return
+     */
     public void setArrAirport(String arrAirport) {
         for (int i = 0; i < Reference.airportList.length; i++) {
             if (arrAirport.equals(Reference.airportList[i])) {
@@ -67,10 +96,18 @@ public class Ticket implements IDisplayComponent {
         }
     }
 
+    /**
+     * arrAirport getter
+     * @return
+     */
     public String getArrAirport() {
         return info.get(3);
     }
 
+    /**
+     * Price setter
+     * @param price
+     */
     public void setPrice(int price) {
         if (info.size() < 5) {
             info.add(4, Integer.toString(price));
@@ -80,10 +117,18 @@ public class Ticket implements IDisplayComponent {
         }
     }
 
+    /**
+     * Price getter
+     * @return
+     */
     public String getPrice() {
         return info.get(4);
     }
 
+    /**
+     * Customer name getter
+     * @return
+     */
     private String getCustomerName() {
         String name;
         if (customer == null) {
@@ -134,6 +179,9 @@ public class Ticket implements IDisplayComponent {
         info.clear();
     }
 
+    /**
+     * Draws the ticket on the screen and its information
+     */
     @Override
     public void draw() {
         refreshDisplay();

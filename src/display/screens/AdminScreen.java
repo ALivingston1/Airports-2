@@ -4,12 +4,25 @@ import display.components.AbstractScreen;
 import display.components.DisplayBox;
 import util.UI;
 
+/**
+ * This screen is the initial screen for the 'admin'
+ * of the system.
+ */
 public class AdminScreen extends AbstractScreen {
 
+    /**
+     * Sets a parent screen to open back up onto when current one closes.
+     * @param screen
+     */
     public AdminScreen(AbstractScreen screen) {
         super(screen);
     }
 
+    /**
+     * Asks to view a part of the system or exit.
+     * User response must be "View", "1", "Exit", or "2"
+     * else it will ask to input a relevant response
+     */
     @Override
     public void open() {
         super.open();
