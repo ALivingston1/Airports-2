@@ -30,7 +30,7 @@ public class Main {
     /**
      * Creates all airports, aircraft, etc. in the system and assigns their values semi-randomly
      */
-    public static void initSystem({
+    public static void initSystem() {
         for (String s : Reference.airportList) {
             Airport temp = new Airport(s);
             int rand = UI.getRandomInt(0, 1);
