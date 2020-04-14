@@ -19,7 +19,7 @@ public class ViewScreen extends AbstractScreen {
 
     /**
      * Asks user to select what object they want to view, then opens corresponding screen
-     * (Airport, Aircraft, Passenger (WIP).
+     * (Airport, Aircraft, Passenger (WIP)).
      */
     @Override
     public void open() {

@@ -44,6 +44,7 @@ public class ViewAircraftScreen extends AbstractBoxScreen {
     @Override
     public void open() {
         super.open();
+
         DisplayBox displayBox = new DisplayBox("");
         if (aircraft == null) {
 
@@ -73,11 +74,13 @@ public class ViewAircraftScreen extends AbstractBoxScreen {
             displayBox.addData("Airline: " + ((Airliner) aircraft).getAirline());
             displayBox.addData("Departure Airport: " + aircraft.getOrigin());
             displayBox.addData("Arrival Airport: " + aircraft.getDestination());
-            displayBox.addData("Souls on board: " + ((Airliner) aircraft).getSouls().size());
-            displayBox.addData("Gingers on board: " + (((Airliner) aircraft).getSouls().size() - ((Airliner) aircraft).getBodies().size()));
+            displayBox.addData("Souls on board: " + ((Airliner) aircraft).getNumSouls());
+            displayBox.addData("Gingers on board: " + (((Airliner) aircraft).getNumSouls() - ((Airliner) aircraft).getNumBodies()));
             displayBox.addData("Aircraft Make: " + aircraft.getMake());
             displayBox.addData("Aircraft Model: " + aircraft.getModel());
             displayBox.addData("Weight capacity: " + aircraft.getWeightCapacity());
+
+            displayBox.draw();
 
         } else if (aircraft instanceof CargoTransporter) {
             displayBox.setTitle("Flight " + aircraft.getFlightNumber());
@@ -86,6 +89,8 @@ public class ViewAircraftScreen extends AbstractBoxScreen {
             displayBox.addData("Aircraft Make: " + aircraft.getMake());
             displayBox.addData("Aircraft Model: " + aircraft.getModel());
             displayBox.addData("Weight capacity: " + aircraft.getWeightCapacity());
+
+            displayBox.draw();
         }
     }
 }

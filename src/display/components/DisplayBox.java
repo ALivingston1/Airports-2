@@ -108,6 +108,15 @@ public class DisplayBox implements IDisplayComponent {
     }
 
     /**
+     * Wipes all data in box, including
+     * the title.
+     */
+    public void clear() {
+        data.clear();
+        addData("");
+    }
+
+    /**
      * Actually draws the displaybox
      * If the box has only a title, won't
      * draw the sections.

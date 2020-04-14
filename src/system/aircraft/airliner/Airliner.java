@@ -25,7 +25,7 @@ public class Airliner implements IAircraft {
     private int passengerCapacity;
 
     private ArrayList<IPerson> bodies;
-    private ArrayList<IPerson> souls;
+    private int souls;
 
     /**
      * Clears the list of souls.
@@ -142,12 +142,33 @@ public class Airliner implements IAircraft {
         return bodies;
     }
 
+    public int getNumBodies() {
+        if (bodies.isEmpty()) {
+            return 0;
+        } else {
+            return bodies.size();
+        }
+    }
+
     /**
-     * Getter for souls on board aircraft
-     * @return
+     * Returns number of souls on board
+     * @return int souls
      */
-    public ArrayList<IPerson> getSouls() {
+    public int getNumSouls() {
         return souls;
+    }
+
+    /**
+     * Setter for bodies. If they aren't
+     * ginger, then add to soul counter.
+     * @param person
+     */
+    public void addBodies(IPerson person) {
+        bodies.add(person);
+
+        if (!person.isGing()) {
+            souls++;
+        }
     }
 
     /**

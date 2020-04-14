@@ -36,55 +36,71 @@ public class ViewAirportScreen extends AbstractBoxScreen {
     public void open() {
         super.open();
 
+        initAirportList();
         getAirport();
         displayBox.draw();
-        System.out.println("Would you like to list its aircraft?");
+        System.out.println("Would you like to list its " + airport.getAircraft().size() + " aircraft?");
         UI.draw("(1) Yes", "(2) No");
         String response = UI.getString();
+
         if (response.equalsIgnoreCase("Yes") || response.equalsIgnoreCase(Integer.toString(1))) {
             if (airport.getAircraft().size() == 0) {
                 System.out.println("No aircraft present at this airport.");
-            } else {
 
-                int i = 0;
-                DisplayBox temp = new DisplayBox(airport.getIdentifier() + "'s Aircraft");
-                for (IAircraft a : airport.getAircraft()) {
-                    if (i < 5) {
-                        temp.setData(temp.getNumSections(), temp.data.get(temp.getNumSections() - 1) + a.getFlightNumber() + " ");
-                    } else {
-                        temp.addData(a.getFlightNumber() + " ");
-                        i = 0;
+            } else {
+                System.out.println(" ".repeat(30) + airport.getIdentifier() + "'s Aircraft:");
+
+                for (int i = 0; i < airport.getAircraft().size() / 10; i++) {
+                    for (int j = 0; j < 10; j++) {
+                        System.out.print(airport.getAircraft().get((i * 10) + j).getFlightNumber() + " ");
                     }
-                    i++;
+                    System.out.println();
                 }
-                temp.draw();
             }
 
-            System.out.println("Would you like to view any of these?");
+            System.out.println("\nWould you like to view one of " + airport.getIdentifier() + "'s flights?");
             UI.draw("(1) Yes", "(2) No");
             response = UI.getString();
             if (response.equalsIgnoreCase("Yes") || response.equalsIgnoreCase(Integer.toString(1))) {
-                System.out.println("Which one?");
 
-                response = UI.getString();
-                for (IAircraft a : Reference.aircraftList) {
-                    if (response.equalsIgnoreCase(a.getFlightNumber())) {
-                        ViewAircraftScreen viewAircraftScreen = new ViewAircraftScreen(this, a);
-                        viewAircraftScreen.open();
+                boolean flightNotFound = true;
+                while (flightNotFound) {
+                    System.out.print("Which flight: ");
+                    response = UI.getString();
+
+                    for (IAircraft a : Reference.aircraftList) {
+
+                        if (response.equalsIgnoreCase(a.getFlightNumber())) {
+                            flightNotFound = false;
+                            ViewAircraftScreen viewAircraftScreen = new ViewAircraftScreen(this, a);
+                            viewAircraftScreen.open();
+                        }
+                    }
+
+                    if (flightNotFound) {
+                        System.out.println("Flight not found, try again.");
                     }
                 }
             }
 
-            UI.draw("(1) View another airport", "(2) Exit");
-            response = UI.getString();
+        } else {
+            boolean gettingResponse = true;
 
-            if (response.equalsIgnoreCase("View another airport") || response.equalsIgnoreCase(Integer.toString(1))) {
-                ViewScreen viewScreen = new ViewScreen(this);
-                viewScreen.open();
-            } else if (response.equalsIgnoreCase("Exit") || response.equalsIgnoreCase(Integer.toString(2))) {
-                super.close();
+            while (gettingResponse) {
+                System.out.println("Would you like to view another airport?");
+                UI.draw("(1) Yes", "(2) No");
+                response = UI.getString();
+
+                if (response.equalsIgnoreCase("Yes") || response.equalsIgnoreCase(Integer.toString(1))) {
+                    this.open();
+                } else if (response.equalsIgnoreCase("No") || response.equalsIgnoreCase(Integer.toString(2))) {
+                    super.close();
+                } else {
+                    System.out.println("Response unknown, try again.");
+                }
             }
         }
+        super.close();
     }
 
     /**
@@ -92,13 +108,9 @@ public class ViewAirportScreen extends AbstractBoxScreen {
      * Displays a list of all active airports.
      */
     private void getAirport() {
-        DisplayBox airports = new DisplayBox("Which airport would you like to view?");
-        String temp = "";
-        for (int i = 0; i < Reference.airports.size(); i++) {
-            temp = temp + Reference.airports.get(i).getIdentifier() + " ";
+        if (displayBox.getNumSections() > 0) {
+            displayBox.clear();
         }
-        airports.addData(temp);
-        airports.draw();
 
         String response = UI.getString();
         for (Airport a : Reference.airports) {
@@ -115,5 +127,20 @@ public class ViewAirportScreen extends AbstractBoxScreen {
             System.out.println("Try again: ");
             getAirport();
         }
+    }
+
+    /**
+     * Sets up the display box that
+     * contains all of the active airports.
+     * Box lists each active airport's identifier.
+     */
+    private void initAirportList() {
+        DisplayBox airports = new DisplayBox("Which airport would you like to view?");
+        String temp = "";
+        for (int i = 0; i < Reference.airports.size(); i++) {
+            temp = temp + Reference.airports.get(i).getIdentifier() + " ";
+        }
+        airports.addData(temp);
+        airports.draw();
     }
 }
