@@ -44,34 +44,46 @@ public class ViewAirportScreen extends AbstractBoxScreen {
         if (response.equalsIgnoreCase("Yes") || response.equalsIgnoreCase(Integer.toString(1))) {
             if (airport.getAircraft().size() == 0) {
                 System.out.println("No aircraft present at this airport.");
-            }
-            for (IAircraft a : airport.getAircraft()) {
-                System.out.print(a.getFlightNumber() + " ");
-            }
-        }
+            } else {
 
-        System.out.println("Would you like to view any of these?");
-        UI.draw("(1) Yes", "(2) No");
-        response = UI.getString();
-        if (response.equalsIgnoreCase("Yes") || response.equalsIgnoreCase(Integer.toString(1))) {
-            System.out.println("Which one?");
+                int i = 0;
+                DisplayBox temp = new DisplayBox(airport.getIdentifier() + "'s Aircraft");
+                for (IAircraft a : airport.getAircraft()) {
+                    if (i < 5) {
+                        temp.setData(temp.getNumSections(), temp.data.get(temp.getNumSections() - 1) + a.getFlightNumber() + " ");
+                    } else {
+                        temp.addData(a.getFlightNumber() + " ");
+                        i = 0;
+                    }
+                    i++;
+                }
+                temp.draw();
+            }
 
+            System.out.println("Would you like to view any of these?");
+            UI.draw("(1) Yes", "(2) No");
             response = UI.getString();
-            for (IAircraft a : Reference.aircraftList) {
-                if (response.equalsIgnoreCase(a.getFlightNumber())) {
-                    ViewAircraftScreen viewAircraftScreen = new ViewAircraftScreen(this, a);
+            if (response.equalsIgnoreCase("Yes") || response.equalsIgnoreCase(Integer.toString(1))) {
+                System.out.println("Which one?");
+
+                response = UI.getString();
+                for (IAircraft a : Reference.aircraftList) {
+                    if (response.equalsIgnoreCase(a.getFlightNumber())) {
+                        ViewAircraftScreen viewAircraftScreen = new ViewAircraftScreen(this, a);
+                        viewAircraftScreen.open();
+                    }
                 }
             }
-        }
 
-        UI.draw("(1) View another airport", "(2) Exit");
-        response = UI.getString();
+            UI.draw("(1) View another airport", "(2) Exit");
+            response = UI.getString();
 
-        if (response.equalsIgnoreCase("View another airport") || response.equalsIgnoreCase(Integer.toString(1))) {
-            ViewScreen viewScreen = new ViewScreen(this);
-            viewScreen.open();
-        } else if (response.equalsIgnoreCase("Exit") || response.equalsIgnoreCase(Integer.toString(2))) {
-            super.close();
+            if (response.equalsIgnoreCase("View another airport") || response.equalsIgnoreCase(Integer.toString(1))) {
+                ViewScreen viewScreen = new ViewScreen(this);
+                viewScreen.open();
+            } else if (response.equalsIgnoreCase("Exit") || response.equalsIgnoreCase(Integer.toString(2))) {
+                super.close();
+            }
         }
     }
 

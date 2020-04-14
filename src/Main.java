@@ -31,16 +31,7 @@ public class Main {
      * Creates all airports, aircraft, etc. in the system and assigns their values semi-randomly
      */
     public static void initSystem() {
-        for (String s : Reference.airportList) {
-            Airport temp = new Airport(s);
-            int rand = UI.getRandomInt(0, 1);
-            if (rand == 0) {
-                temp.isTowered(true);
-            }
-            rand = UI.getRandomInt(50, 300);
-            temp.setCapacity(rand);
-            Reference.airports.add(temp);
-        }
+        createAirports();
 
         for (Airport a : Reference.airports) {
             for (int i = 0; i < Reference.airports.size(); i++) {
@@ -98,6 +89,24 @@ public class Main {
                     }
                 }
             }
+        }
+    }
+
+    /**
+     * Creates new airport objects from the reference list.
+     * Each airport has random values assigned to each variable.
+     * Adds each airport to an active list of airports.
+     */
+    private static void createAirports() {
+        for (String s : Reference.airportList) {
+            Airport temp = new Airport(s);
+            int rand = UI.getRandomInt(0, 1);
+            if (rand == 0) {
+                temp.isTowered(true);
+            }
+            rand = UI.getRandomInt(50, 300);
+            temp.setCapacity(rand);
+            Reference.airports.add(temp);
         }
     }
 }
