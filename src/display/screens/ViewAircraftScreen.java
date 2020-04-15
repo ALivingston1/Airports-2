@@ -18,6 +18,7 @@ public class ViewAircraftScreen extends AbstractBoxScreen {
 
     /**
      * Sets a parent screen to open back up onto when current one closes.
+     *
      * @param parent
      */
     public ViewAircraftScreen(AbstractScreen parent) {
@@ -27,6 +28,7 @@ public class ViewAircraftScreen extends AbstractBoxScreen {
     /**
      * Sets a parent screen to open back up onto when current one closes.
      * Will set the current aircraft to view by default.
+     *
      * @param parent
      * @param aircraft
      */
@@ -46,29 +48,11 @@ public class ViewAircraftScreen extends AbstractBoxScreen {
         super.open();
 
         DisplayBox displayBox = new DisplayBox("");
+
         if (aircraft == null) {
+            Airport airport = UI.getAirport();
+            UI.listAircraft(airport);
 
-            if (Reference.aircraftList.size() == 0) {
-                System.out.println("There are no aircraft for you to view at this time.");
-            } else {
-                System.out.println("Which aircraft would you like to view?");
-
-                String temp = "";
-                for (IAircraft a : Reference.aircraftList) {
-                    for (int i = 0; i < 100; i++) {
-                        temp = temp + a.getFlightNumber() + " ";
-                    }
-                    System.out.print(temp);
-                    temp = "\n";
-                }
-
-                String response = UI.getString();
-                for (IAircraft a : Reference.aircraftList) {
-                    if (response == a.getFlightNumber()) {
-                        open();
-                    }
-                }
-            }
         } else if (aircraft instanceof Airliner) {
             displayBox.setTitle("Flight " + aircraft.getFlightNumber());
             displayBox.addData("Airline: " + ((Airliner) aircraft).getAirline());
@@ -91,6 +75,23 @@ public class ViewAircraftScreen extends AbstractBoxScreen {
             displayBox.addData("Weight capacity: " + aircraft.getWeightCapacity());
 
             displayBox.draw();
+        }
+
+        System.out.println("Would you like to view a list of " + aircraft.getFlightNumber() + "'s passengers?");
+        UI.draw("(1) Yes", "(2) No");
+        boolean flag = true;
+        while (flag) {
+            String response = UI.getString();
+            if (response.equalsIgnoreCase("Yes") || response.equalsIgnoreCase("1")) {
+                ViewPassengerScreen screen = new ViewPassengerScreen(this);
+                screen.open();
+
+                flag = false;
+            } else if (response.equalsIgnoreCase("No") || response.equalsIgnoreCase("2")) {
+                flag = false;
+            } else {
+                System.out.print("\nTry again: ");
+            }
         }
     }
 }

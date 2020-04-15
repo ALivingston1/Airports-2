@@ -39,8 +39,8 @@ public class ViewScreen extends AbstractScreen {
             viewAircraft.open();
             close();
         } else if (response.equalsIgnoreCase("Passenger") || response.equalsIgnoreCase("Passenger work in progress")) {
-//            ViewPassengerScreen viewPassenger = new ViewPassengerScreen(this);
-//            viewPassenger.open();
+            ViewPassengerScreen viewPassenger = new ViewPassengerScreen(this);
+            viewPassenger.open();
             close();
         } else if (response.equalsIgnoreCase("Exit") || response.equalsIgnoreCase("3")) {
             System.out.println("Closing...");

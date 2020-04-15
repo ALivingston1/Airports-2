@@ -142,8 +142,12 @@ public class Airliner implements IAircraft {
         return bodies;
     }
 
+    /**
+     * Gets number of bodies in the aircraft
+     * @return int
+     */
     public int getNumBodies() {
-        if (bodies.isEmpty()) {
+        if (bodies == null) {
             return 0;
         } else {
             return bodies.size();

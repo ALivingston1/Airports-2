@@ -8,6 +8,8 @@ import system.aircraft.IAircraft;
 import util.Reference;
 import util.UI;
 
+import static util.UI.getAirport;
+
 /**
  * This class is the foundation for viewing an airport
  * and lists each aircraft off if user selects to.
@@ -37,26 +39,15 @@ public class ViewAirportScreen extends AbstractBoxScreen {
         super.open();
 
         initAirportList();
-        getAirport();
+
+        getNewAirport();
         displayBox.draw();
         System.out.println("Would you like to list its " + airport.getAircraft().size() + " aircraft?");
         UI.draw("(1) Yes", "(2) No");
         String response = UI.getString();
 
         if (response.equalsIgnoreCase("Yes") || response.equalsIgnoreCase(Integer.toString(1))) {
-            if (airport.getAircraft().size() == 0) {
-                System.out.println("No aircraft present at this airport.");
-
-            } else {
-                System.out.println(" ".repeat(30) + airport.getIdentifier() + "'s Aircraft:");
-
-                for (int i = 0; i < airport.getAircraft().size() / 10; i++) {
-                    for (int j = 0; j < 10; j++) {
-                        System.out.print(airport.getAircraft().get((i * 10) + j).getFlightNumber() + " ");
-                    }
-                    System.out.println();
-                }
-            }
+            UI.listAircraft(airport);
 
             System.out.println("\nWould you like to view one of " + airport.getIdentifier() + "'s flights?");
             UI.draw("(1) Yes", "(2) No");
@@ -107,25 +98,24 @@ public class ViewAirportScreen extends AbstractBoxScreen {
      * Prompts user to type which airport to view.
      * Displays a list of all active airports.
      */
-    private void getAirport() {
+    private void getNewAirport() {
         if (displayBox.getNumSections() > 0) {
             displayBox.clear();
         }
 
-        String response = UI.getString();
-        for (Airport a : Reference.airports) {
-            if (response.equalsIgnoreCase(a.getIdentifier())) {
-                airport = a;
-                displayBox.setTitle(a.getIdentifier());
-                displayBox.addData("Aircraft Capacity: " + a.getCapacity());
-                displayBox.addData("Towered: " + a.isTowered());
-                break;
-            }
-        }
-
-        if (airport == null) {
-            System.out.println("Try again: ");
-            getAirport();
+        boolean flag = true;
+        while (flag) {
+            Airport airport = getAirport();
+                if (airport != null) {
+                    this.airport = airport;
+                    displayBox.setTitle(airport.getIdentifier());
+                    displayBox.addData("Aircraft Capacity: " + airport.getCapacity());
+                    displayBox.addData("Towered: " + airport.isTowered());
+                    flag = false;
+                    break;
+                } else {
+                    System.out.println("Try again: ");
+                }
         }
     }
 
